@@ -7,7 +7,7 @@ from flask import Flask, render_template, jsonify, redirect, url_for, request
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app)
 
 app.config.from_object(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -22,6 +22,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
+    print("Method called atleast")
     if request.method == 'POST':
         file = request.files['cert']
 
@@ -45,6 +46,7 @@ def upload():
             file.save(filename)
 
             response = flask.jsonify({"success": True})
+            response.headers.add('Access-Control-Allow-Origin', 'http://aihackathon.in')
             response.headers.add('Access-Control-Allow-Headers', 'x-requested-with')
             return response
 
@@ -54,4 +56,4 @@ def allowed_file(filename):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000, host='localhost')
