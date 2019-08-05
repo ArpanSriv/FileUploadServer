@@ -46,7 +46,7 @@ def upload():
             file.save(filename)
 
             response = flask.jsonify({"success": True})
-            response.headers.add('Access-Control-Allow-Origin', 'http://aihackathon.in')
+            response.headers.add('Access-Control-Allow-Origin', 'https://aihackathon.in')
             response.headers.add('Access-Control-Allow-Headers', 'x-requested-with')
             return response
 
